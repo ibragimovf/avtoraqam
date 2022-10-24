@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ru" class="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Title -->
+    <title>Главная</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://avtoraqam.uzex.uz/Content/img/favicon/favicon.png">
+
+    <!-- Styles -->
+    <style>
+        *, *:before, *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body, * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+    <link rel="stylesheet" href="./files/bootstrap.min.css">
+    <link rel="stylesheet" href="./files/main.css">
+
+    <style type="text/css">span.im-caret {
+        -webkit-animation: 1s blink step-end infinite;
+        animation: 1s blink step-end infinite;
+    }
+
+    @keyframes blink {
+        from, to {
+            border-right-color: black;
+        }
+        50% {
+            border-right-color: transparent;
+        }
+    }
+
+    @-webkit-keyframes blink {
+        from, to {
+            border-right-color: black;
+        }
+        50% {
+            border-right-color: transparent;
+        }
+    }
+
+    div.im-colormask > input {
+        position: absolute;
+        display: inline-block;
+        background-color: transparent;
+        color: transparent;
+        -webkit-appearance: caret;
+        -moz-appearance: caret;
+        border-style: none;
+        left: 0; /*calculated*/
+    }
+
+    div.im-colormask > input:focus {
+        outline: none;
+    }
+
+    div.im-colormask > input::-moz-selection {
+        background: none;
+    }
+
+    div.im-colormask > input::selection {
+        background: none;
+    }
+
+    div.im-colormask > input::-moz-selection {
+        background: none;
+    }
+
+    div.im-colormask > div {
+        color: black;
+        display: inline-block;
+        width: 100px; /*calculated*/
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    h1 {
+        font-size: 30px;
+        position: absolute;
+        margin: 0 0;
+        color: #42BAB8;
+        font-weight: 200;
+    }
+    </style>
+</head>
+<body>
+
+<!-- SEARCH NUMBER-->
+<section class="searchNumber">
+    <h1 style="margin-left: 20px; margin-top: 0%; color: white;">UZAVTORAQAM</h1>
+    <div class="container">
+        <div class="searchMenu">
+            <ul class="nav nav-tabs">
+                <li class="active" id="fizAnchor"><a href="https://avtoraqam.uzex.uz/?AspxAutoDetectCookieSupport=1#yur"
+                                                     data-toggle="tab">Физ. лицо</a></li>
+                <li id="yurAnchor"><a href="https://avtoraqam.uzex.uz/?AspxAutoDetectCookieSupport=1#fiz"
+                                      data-toggle="tab">Юр. лицо</a></li>
+            </ul>
+        </div>
+        <div class="searchInput">
+            <div class="tab-content">
+                <input type="hidden" id="USER_TYPE" value="2">
+                <input type="hidden" id="NUMBER" value="">
+                <div id="yur" class="tab-pane fade in active">
+                    <form id="fiz_face">
+                        <div class="inputNum">
+                            <input type="number" id="SEARCH_NUM1" name="SearchNum" class="searchNum group1"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   maxlength="2"
+                                   placeholder="01">
+                            <input type="text" name="SearchNum" class="searchNum group2" maxlength="1"
+                                   placeholder="A">
+                            <input type="number" name="SearchNum" class="searchNum group3" maxlength="3"
+                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                   placeholder="123">
+                            <input type="text" name="SearchNum" class="searchNum group3" maxlength="2"
+                                   placeholder="EA">
+                            <!--                            <input type="text" id="SEARCH_REGION1" name="SearchRegion" class="searchRegion group1"-->
+                            <!--                                   placeholder="A 123 EA" data-mask="_ ___ __" maxlength="6">-->
+                        </div>
+                        <div class="goSearch">
+                            <input type="button" value="Поиск">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="search-form" action="https://avtoraqam.uzex.uz/ru/home/search" method="get" style="display: none;">
+        <input id="StartPrice" name="StartPrice" type="hidden" value="">
+        <input id="EndPrice" name="EndPrice" type="hidden" value="">
+        <input id="RegionID" name="RegionID" type="hidden" value="">
+        <input id="DistrictID" name="DistrictID" type="hidden" value="">
+        <input id="UserType" name="UserType" type="hidden" value="">
+        <input id="PrefixNum" name="PrefixNum" type="hidden" value="">
+        <input id="Chars" name="Chars" type="hidden" value="">
+    </form>
+</section>
+<!-- end SEARCH NUMBER--
+
+<-- Saling numbers -->
+<section class="sailNumbers">
+    <div class="container personalTabs">
+        <div class="tab-content" style="clear:both;">
+            <div role="tabpanel" class="tab-pane active">
+                <div class="vistavlennieNumbers">
+                    <div class="row">
+                        <div id="activeLotsContainer" style="display: block;"><p class="title">г.Ташкент (10126)</p>
+                            <div class="region-content">
+                                <div class="jscroll scroll">
+                                    <div class="jscroll-inner">
+                                        <div class="numberBlock col-sm-4 col-md-3">
+                                            <div class="numberBlockInner">
+                                                <div class="numberImg">
+                                                    <p class="numberImgRegion">01</p>
+                                                    <p class="numberImgNum">S 585 SB</p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">№ лота</span>
+                                                        <span class="element">4774206</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Категория</span>
+
+                                                        <span class="element">
+                                                            <label class="alert-info">Физ. лицо</label>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Старт.цена</span>
+                                                        <span class="element">1&nbsp;500&nbsp;000,00</span>
+                                                    </p>
+                                                    <p class="numberInfo left"></p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Текущая цена</span>
+                                                        <span class="element">
+                                                            <label class="alert-success">
+                                                                3&nbsp;330&nbsp;000,00
+                                                            </label>
+                                                         </span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Дата окончания</span>
+                                                        <span class="element"><span class="time-size">03.08.22</span> - 19:15:00</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Регион</span>
+                                                        <span class="element">г.Ташкент</span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo right">
+                                                        <span class="title">&nbsp;</span>
+                                                        <a class="prodaje"
+                                                           href="https://avtoraqam.uzex.uz/ru/lot/item/4774206"
+                                                           target="_blank">Подробнее</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="numberBlock col-sm-4 col-md-3">
+                                            <div class="numberBlockInner">
+                                                <div class="numberImg">
+                                                    <p class="numberImgRegion">01</p>
+                                                    <p class="numberImgNum">S 585 SB</p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">№ лота</span>
+                                                        <span class="element">4774206</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Категория</span>
+
+                                                        <span class="element">
+                                                            <label class="alert-info">Физ. лицо</label>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Старт.цена</span>
+                                                        <span class="element">1&nbsp;500&nbsp;000,00</span>
+                                                    </p>
+                                                    <p class="numberInfo left"></p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Текущая цена</span>
+                                                        <span class="element">
+                                                            <label class="alert-success">
+                                                                3&nbsp;330&nbsp;000,00
+                                                            </label>
+                                                         </span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Дата окончания</span>
+                                                        <span class="element"><span class="time-size">03.08.22</span> - 19:15:00</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Регион</span>
+                                                        <span class="element">г.Ташкент</span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo right">
+                                                        <span class="title">&nbsp;</span>
+                                                        <a class="prodaje"
+                                                           href="https://avtoraqam.uzex.uz/ru/lot/item/4774206"
+                                                           target="_blank">Подробнее</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="numberBlock col-sm-4 col-md-3">
+                                            <div class="numberBlockInner">
+                                                <div class="numberImg">
+                                                    <p class="numberImgRegion">01</p>
+                                                    <p class="numberImgNum">S 585 SB</p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">№ лота</span>
+                                                        <span class="element">4774206</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Категория</span>
+
+                                                        <span class="element">
+                                                            <label class="alert-info">Физ. лицо</label>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Старт.цена</span>
+                                                        <span class="element">1&nbsp;500&nbsp;000,00</span>
+                                                    </p>
+                                                    <p class="numberInfo left"></p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Текущая цена</span>
+                                                        <span class="element">
+                                                            <label class="alert-success">
+                                                                3&nbsp;330&nbsp;000,00
+                                                            </label>
+                                                         </span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Дата окончания</span>
+                                                        <span class="element"><span class="time-size">03.08.22</span> - 19:15:00</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Регион</span>
+                                                        <span class="element">г.Ташкент</span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo right">
+                                                        <span class="title">&nbsp;</span>
+                                                        <a class="prodaje"
+                                                           href="https://avtoraqam.uzex.uz/ru/lot/item/4774206"
+                                                           target="_blank">Подробнее</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="numberBlock col-sm-4 col-md-3">
+                                            <div class="numberBlockInner">
+                                                <div class="numberImg">
+                                                    <p class="numberImgRegion">01</p>
+                                                    <p class="numberImgNum">S 585 SB</p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">№ лота</span>
+                                                        <span class="element">4774206</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Категория</span>
+
+                                                        <span class="element">
+                                                            <label class="alert-info">Физ. лицо</label>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Старт.цена</span>
+                                                        <span class="element">1&nbsp;500&nbsp;000,00</span>
+                                                    </p>
+                                                    <p class="numberInfo left"></p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Текущая цена</span>
+                                                        <span class="element">
+                                                            <label class="alert-success">
+                                                                3&nbsp;330&nbsp;000,00
+                                                            </label>
+                                                         </span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo left">
+                                                        <span class="title">Дата окончания</span>
+                                                        <span class="element"><span class="time-size">03.08.22</span> - 19:15:00</span>
+                                                    </p>
+                                                    <p class="numberInfo right">
+                                                        <span class="title">Регион</span>
+                                                        <span class="element">г.Ташкент</span>
+                                                    </p>
+                                                </div>
+                                                <div class="numberInfoString">
+                                                    <p class="numberInfo right">
+                                                        <span class="title">&nbsp;</span>
+                                                        <a class="prodaje"
+                                                           href="https://avtoraqam.uzex.uz/ru/lot/item/4774206"
+                                                           target="_blank">Подробнее</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="load-more">
+                                            <a class="jscroll-next"
+                                               href="https://avtoraqam.uzex.uz/ru/home/byregion?usertype=2&amp;status=0&amp;page=2&amp;regionid=1&amp;istoday=False">Загрузить
+                                                еще...</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <p>
+            ИНН 100 200 300 <br>Расчетный счет для юр. лиц: 2020 8000 9009 9009 9009 <br>
+            Банк 00777,ОПЕРУ ЧАБ "DAVLAT BANK"
+        </p>
+        <div class="adress" style="width: 560px;float: right;">
+            <p>АО "Узбекская Республиканская <br>товарно-сырьевая биржа"</p>
+            <p>Адрес: 100000, Республика <br>Узбекистан, г.Ташкент, ул.Бобура,77</p>
+            <p>Тел: 90 900 90 90</p>
+            <p>E-mail: ibragimovf.uz</p>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+
+<script>
+    Array.prototype.forEach.call(document.body.querySelectorAll("*[data-mask]"), applyDataMask);
+
+    function applyDataMask(field) {
+        var mask = field.dataset.mask.split('');
+
+        // For now, this just strips everything that's not a number
+        function stripMask(maskedData) {
+            function isDigit(char) {
+                return /[A-Za-z]/.test(char);
+            }
+
+            return maskedData.split('').filter(isDigit);
+        }
+
+        // Replace _ characters with characters from data
+        function applyMask(data) {
+            return mask.map(function (char) {
+                if (char != '_') return char;
+                if (data.length == 0) return char;
+                return data.shift();
+            }).join('')
+        }
+
+        function reapplyMask(data) {
+            return applyMask(stripMask(data));
+        }
+
+        function changed() {
+            var oldStart = field.selectionStart;
+            var oldEnd = field.selectionEnd;
+
+            field.value = reapplyMask(field.value);
+
+            field.selectionStart = oldStart;
+            field.selectionEnd = oldEnd;
+        }
+
+        field.addEventListener('click', changed)
+        field.addEventListener('keyup', changed)
+    }
+</script>
+</body>
+</html>

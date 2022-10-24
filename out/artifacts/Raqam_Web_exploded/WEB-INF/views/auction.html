@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru" class="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Title -->
+    <title>Аукцион</title>
+    <link rel="shortcut icon" href="https://avtoraqam.uzex.uz/Content/img/favicon/favicon.png">
+
+    <!-- Styles -->
+    <style>
+        *, *:before, *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body, * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+    </style>
+    <link rel="stylesheet" href="./auction/bootstrap.min.css">
+    <link rel="stylesheet" href="./auction/main.css">
+    <link rel="stylesheet" href="./auction/flipclock.css">
+
+
+    <style type="text/css">span.im-caret {
+        -webkit-animation: 1s blink step-end infinite;
+        animation: 1s blink step-end infinite;
+    }
+
+    @keyframes blink {
+        from, to {
+            border-right-color: black;
+        }
+        50% {
+            border-right-color: transparent;
+        }
+    }
+
+    @-webkit-keyframes blink {
+        from, to {
+            border-right-color: black;
+        }
+        50% {
+            border-right-color: transparent;
+        }
+    }
+
+    div.im-colormask > input {
+        position: absolute;
+        display: inline-block;
+        background-color: transparent;
+        color: transparent;
+        -webkit-appearance: caret;
+        -moz-appearance: caret;
+        border-style: none;
+        left: 0; /*calculated*/
+    }
+
+    div.im-colormask > input:focus {
+        outline: none;
+    }
+
+    div.im-colormask > input::-moz-selection {
+        background: none;
+    }
+
+    div.im-colormask > input::selection {
+        background: none;
+    }
+
+    div.im-colormask > input::-moz-selection {
+        background: none;
+    }
+
+    div.im-colormask > div {
+        color: black;
+        display: inline-block;
+        width: 100px; /*calculated*/
+    }</style>
+
+    <script>
+        setInterval(function () {
+            var clock = document.getElementById("clock");
+            clock.innerHTML = date_time();
+        }, 1000);
+
+        /* функция добавления ведущих нулей */
+        /* (если число меньше десяти, перед числом добавляем ноль) */
+        function zero_first_format(value) {
+            if (value < 10) {
+                return "0" + value;
+            }
+            return value;
+        }
+
+        /* функция получения текущей даты и времени */
+        function date_time() {
+            var current_datetime = new Date();
+            var day = zero_first_format(current_datetime.getDate());
+            var month = zero_first_format(current_datetime.getMonth() + 1);
+            var year = current_datetime.getFullYear();
+            var hours = zero_first_format(current_datetime.getHours());
+            var minutes = zero_first_format(current_datetime.getMinutes());
+            var seconds = zero_first_format(current_datetime.getSeconds());
+
+            return day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f2f1ed;
+        }
+
+        .wrap {
+            /*position: absolute;*/
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            height: 150px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        h1 strong {
+            font-weight: 400;
+            color: #ea4c4c;
+        }
+
+        h2 strong {
+            font-weight: 400;
+        }
+
+        .countdown {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .countdown .bloc-time {
+            float: left;
+            margin-right: 45px;
+            text-align: center;
+        }
+
+        .countdown .bloc-time:last-child {
+            margin-right: 0;
+        }
+
+        .countdown .count-title {
+            display: block;
+            margin-bottom: 15px;
+            font: normal 1.2em "Bahnschrift";
+            text-transform: uppercase;
+        }
+
+        .countdown .figure {
+            position: relative;
+            float: left;
+            height: 110px;
+            width: 100px;
+            margin-right: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            -moz-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+            -webkit-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .countdown .figure:last-child {
+            margin-right: 0;
+        }
+
+        .countdown .figure > span {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            font: normal 5.94em/107px "Bahnschrift";
+            font-weight: 700;
+            color: #100c0c;
+        }
+
+        .countdown .figure .top:after,
+        .countdown .figure .bottom-back:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown .figure .top {
+            z-index: 3;
+            background-color: #f7f7f7;
+            transform-origin: 50% 100%;
+            -webkit-transform-origin: 50% 100%;
+            -moz-border-radius-topleft: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;
+            -moz-transform: perspective(200px);
+            -ms-transform: perspective(200px);
+            -webkit-transform: perspective(200px);
+            transform: perspective(200px);
+        }
+
+        .countdown .figure .bottom {
+            z-index: 1;
+        }
+
+        .countdown .figure .bottom:before {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .countdown .figure .bottom-back {
+            z-index: 2;
+            top: 0;
+            height: 50%;
+            overflow: hidden;
+            background-color: #f7f7f7;
+            -moz-border-radius-topleft: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .countdown .figure .bottom-back span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .countdown .figure .top,
+        .countdown .figure .top-back {
+            height: 50%;
+            overflow: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .countdown .figure .top-back {
+            z-index: 4;
+            bottom: 0;
+            background-color: #fff;
+            -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0;
+            -moz-transform: perspective(200px) rotateX(180deg);
+            -ms-transform: perspective(200px) rotateX(180deg);
+            -webkit-transform: perspective(200px) rotateX(180deg);
+            transform: perspective(200px) rotateX(180deg);
+            -moz-border-radius-bottomleft: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            -moz-border-radius-bottomright: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .countdown .figure .top-back span {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        h1 {
+            font-size: 30px;
+            position: absolute;
+            margin: 0 0;
+            color: #42BAB8;
+            font-weight: 200;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // конечная дата
+            const deadline = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDay(), new Date().getHours() + 2);
+            // id таймера
+            let timerId = null;
+
+            // вычисляем разницу дат и устанавливаем оставшееся времени в качестве содержимого элементов
+            function countdownTimer() {
+                const diff = deadline - new Date();
+                if (diff <= 0) {
+                    clearInterval(timerId);
+                }
+                const days = diff > 0 ? Math.floor(diff / 1000 / 60 / 60 / 24) : 0;
+                const hours = diff > 0 ? Math.floor(diff / 1000 / 60 / 60) % 24 : 0;
+                const minutes = diff > 0 ? Math.floor(diff / 1000 / 60) % 60 : 0;
+                const seconds = diff > 0 ? Math.floor(diff / 1000) % 60 : 0;
+
+                $days.textContent = days < 10 ? '0' : Math.floor(days / 10);
+                $days1.textContent = days < 10 ? days : days % 10;
+                $hours.textContent = hours < 10 ? '0' : Math.floor(hours / 10);
+                $hours1.textContent = hours < 10 ? hours : hours % 10;
+                $minutes.textContent = minutes < 10 ? '0' : Math.floor(minutes / 10);
+                $minutes1.textContent = minutes < 10 ? minutes : minutes % 10;
+                $seconds.textContent = seconds < 10 ? '0' : Math.floor(seconds / 10);
+                $seconds1.textContent = seconds < 10 ? seconds : seconds % 10;
+
+            }
+
+            // получаем элементы, содержащие компоненты даты
+            const $days = document.querySelector('.timer__days');
+            const $days1 = document.querySelector('.timer__days1');
+            const $hours = document.querySelector('.timer__hours');
+            const $hours1 = document.querySelector('.timer__hours1');
+            const $minutes = document.querySelector('.timer__minutes');
+            const $minutes1 = document.querySelector('.timer__minutes1');
+            const $seconds = document.querySelector('.timer__seconds');
+            const $seconds1 = document.querySelector('.timer__seconds1');
+            // вызываем функцию countdownTimer
+            countdownTimer();
+            // вызываем функцию countdownTimer каждую секунду
+            timerId = setInterval(countdownTimer, 1000);
+        });
+    </script>
+
+</head>
+<body class="" style="">
+
+<!-- HEADER -->
+<section class="biddingPage">
+    <h1 style="margin-left: 20px; margin-top: -2.5%; color: white;">UZAVTORAQAM</h1>
+    <h4 style="margin-left: 41%; margin-top: -2.2%; color: white;">Серверное время -
+        <span id="clock" style="color: white;"></span>
+    </h4>
+    <div class="container">
+        <h3 class="biddingHeader">№ лота:4766014</h3>
+
+        <div class="auxinBlock">
+            <div class="gosNumberBlock">
+                <p class="gosNumberRegion">01</p>
+                <p class="gosNumberSeries">S 282 OB</p>
+            </div>
+            <div class="auxionPrice">
+                <table>
+
+                    <tbody>
+                    <tr>
+                        <td colspan="2" style="text-align: center;padding-bottom: 20px;font-size: 18px;">
+                            <span style="color: #73BC00;">Выставлен</span>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата начала:</td>
+                        <td>15 июля 2022 г. 21:16</td>
+                    </tr>
+                    <tr>
+                        <td>Дата окончания:</td>
+                        <td>4 августа 2022 г. 10:00</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес регистрации:</td>
+
+                        <td>
+                            <strong>Тошкент шахар ИИБ ЙХХБ "Drivers Village" ИО бўлими </strong><br>
+                            Адрес: г.Ташкент<span>,</span>
+                            Сергелийский р-он<span>,</span>
+                            Янги Сирғали кўчаси 3а
+
+                            <br>
+                            Телефон: +998 712512694
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="wrap">
+                <div class="countdown">
+                    <div class="bloc-time hours" data-init-value="0">
+                        <span class="count-title">Дни</span>
+
+                        <div class="figure hours hours-1">
+                            <span class="timer__days"></span>
+                            <span class="timer__days"></span>
+                        </div>
+
+                        <div class="figure hours hours-2">
+                            <span class="timer__days1"></span>
+                            <span class="timer__days1"></span>
+                        </div>
+                    </div>
+
+                    <div class="bloc-time hours" data-init-value="0">
+                        <span class="count-title">Часов</span>
+
+                        <div class="figure hours hours-1">
+                            <span class="timer__hours"></span>
+                            <span class="timer__hours"></span>
+                        </div>
+
+                        <div class="figure hours hours-2">
+                            <span class="timer__hours1"></span>
+                            <span class="timer__hours1"></span>
+                        </div>
+                    </div>
+
+                    <div class="bloc-time min" data-init-value="0">
+                        <span class="count-title">Минут</span>
+
+                        <div class="figure min min-1">
+                            <span class="timer__minutes"></span>
+                            <span class="timer__minutes"></span>
+                        </div>
+
+                        <div class="figure min min-2">
+                            <span class="timer__minutes1"></span>
+                            <span class="timer__minutes1"></span>
+                        </div>
+                    </div>
+
+                    <div class="bloc-time sec" data-init-value="0">
+                        <span class="count-title">Секунд</span>
+
+                        <div class="figure sec sec-1">
+                            <span class="timer__seconds"></span>
+                            <span class="timer__seconds"></span>
+                        </div>
+
+                        <div class="figure sec sec-2">
+                            <span class="timer__seconds1"></span>
+                            <span class="timer__seconds1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auxionPrice clearfix">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><label class="text-danger">Стартовая цена</label></th>
+                        <th><label class="text-success">Текущая цена</label></th>
+                        <th><label class="text-primary">Следующая лучшая цена</label></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                                <span id="lbl-price">
+                                     1 500 000 сум
+                                </span>
+                        </td>
+                        <td>
+                                <span id="lbl-current-price">
+Не подана                                </span>
+                        </td>
+                        <td>
+                                    <span id="lbl-next-price">
+ 1 515 000 сум                                    </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input id="Price" name="Price" type="hidden" value="1515000">
+
+            </div>
+            <div class="auxionPrice">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th>Комиссионный сбор</th>
+                        <th>Залоговая сумма</th>
+                        <th>Всего</th>
+                    </tr>
+                    <tr>
+                        <td><span id="lbl-comission">  75 750 сум</span></td>
+                        <td><span id="lbl-pledge-sum">  150 000 сум</span></td>
+                        <td><span id="lbl-total">  225 750 сум</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix" style="margin-top: 30px;"></div>
+        </div>
+        <br>
+        <br>
+    </div>
+</section>
+<!-- Sliding div ends here -->
+
+<!--FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <p>
+            ИНН 100 200 300 <br>Расчетный счет для юр. лиц: 2020 8000 9009 9009 9009 <br>
+            Банк 00777,ОПЕРУ ЧАБ "DAVLAT BANK"
+        </p>
+        <div class="adress" style="width: 560px;float: right;">
+            <p>АО "Узбекская Республиканская <br>товарно-сырьевая биржа"</p>
+            <p>Адрес: 100000, Республика <br>Узбекистан, г.Ташкент, ул.Бобура,77</p>
+            <p>Тел: 90 900 90 90</p>
+            <p>E-mail: ibragimovf.uz</p>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+</body>
+</html>
